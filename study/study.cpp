@@ -11,19 +11,40 @@
 #include <unordered_map>
 #include <chrono>
 #include <random>
+#include <thread>
 
 #include "fishnet/base/copyable.h"
 #include "fishnet/base/noncopyable.h"
 #include "fishnet/base/types.h"
 #include "fishnet/base/current_thread.h"
+#include "fishnet/base/mutex.h"
 
 using namespace std;
 using namespace fishnet;
 
 int main() {
-    string st = current_thread::stackTrace(false);
+    MutexLock mu;
 
-    cout << "st: \n" << st << endl;
+    thread t1{[&] {
+        while (true) {
+            MutexLockGuard guard(mu);
+            cout << "t1 get lock" << endl;
+            // this_thread::sleep_for(chrono::milliseconds{100});
+            // break;
+        }
+    }};
+
+    thread t2{[&] {
+        while (true) {
+            MutexLockGuard guard(mu);
+            cout << "t2 get lock" << endl;
+            // this_thread::sleep_for(chrono::milliseconds{100});
+            // break;
+        }
+    }};
+
+    t1.join();
+    t2.join();
 
     return 0;
 }
