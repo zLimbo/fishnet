@@ -130,7 +130,7 @@ public:
         assert(isLockedByThisThread());
     }
 
-    // 内部实用
+    // 内部使用
     void lock() ACQUIRE() {
         MCHECK(pthread_mutex_lock(&mutex_));
         assignHolder();

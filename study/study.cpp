@@ -18,33 +18,15 @@
 #include "fishnet/base/types.h"
 #include "fishnet/base/current_thread.h"
 #include "fishnet/base/mutex.h"
+#include "fishnet/base/timestamp.h"
 
 using namespace std;
 using namespace fishnet;
 
 int main() {
-    MutexLock mu;
+    Timestamp t = Timestamp::now();
 
-    thread t1{[&] {
-        while (true) {
-            MutexLockGuard guard(mu);
-            cout << "t1 get lock" << endl;
-            // this_thread::sleep_for(chrono::milliseconds{100});
-            // break;
-        }
-    }};
-
-    thread t2{[&] {
-        while (true) {
-            MutexLockGuard guard(mu);
-            cout << "t2 get lock" << endl;
-            // this_thread::sleep_for(chrono::milliseconds{100});
-            // break;
-        }
-    }};
-
-    t1.join();
-    t2.join();
+    cout << t.toFormattedString() << endl;
 
     return 0;
 }
