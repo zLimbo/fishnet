@@ -42,7 +42,7 @@ public:
                          microseconds);
     }
 
-    static const int KMicroSecondsPerSecond = 1e6;
+    static const int KMicroSecondsPerSecond = 1000000;
 
 private:
     int64_t microSecondsSinceEpoch_;

@@ -19,14 +19,26 @@
 #include "fishnet/base/current_thread.h"
 #include "fishnet/base/mutex.h"
 #include "fishnet/base/timestamp.h"
+#include "fishnet/base/string_piece.h"
+#include "fishnet/base/log_stream.h"
+#include "fishnet/base/date.h"
+#include "fishnet/base/time_zone.h"
 
 using namespace std;
 using namespace fishnet;
 
 int main() {
-    Timestamp t = Timestamp::now();
+    LogStream ls;
 
-    cout << t.toFormattedString() << endl;
+    ls << 12312 << " " << 56.695 << " " << true;
+
+    auto& buf = ls.buffer();
+
+    cout << buf.toString() << endl;
+
+    Date d(2022, 6, 10);
+
+    cout << d.julianDayNumber() << endl;
 
     return 0;
 }

@@ -9,7 +9,7 @@ bool Condition::waitForSeconds(double seconds) {
     // TODO: FIXME 使用 CLOCK_MONOTONIC 或 CLOCK_MONOTONIC_RAW 防止时间回卷
     clock_gettime(CLOCK_REALTIME, &abstime);
 
-    const int64_t kNanoSecondsPerSecond = 1e9;
+    const int64_t kNanoSecondsPerSecond = 1000000000;
     int64_t nanoseconds = static_cast<int64_t>(seconds * kNanoSecondsPerSecond);
 
     abstime.tv_sec += static_cast<time_t>((abstime.tv_nsec + nanoseconds) /
