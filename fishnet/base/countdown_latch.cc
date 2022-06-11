@@ -2,17 +2,17 @@
 
 using namespace fishnet;
 
-CountdownLatch::CountdownLatch(int count)
+CountDownLatch::CountDownLatch(int count)
     : mutex_(), cond_(mutex_), count_(count) {}
 
-void CountdownLatch::wait() {
+void CountDownLatch::wait() {
     MutexLockGuard lock(mutex_);
     while (count_ > 0) {
         cond_.wait();
     }
 }
 
-void CountdownLatch::countDown() {
+void CountDownLatch::countDown() {
     MutexLockGuard lock(mutex_);
     --count_;
     if (count_ == 0) {
@@ -20,7 +20,7 @@ void CountdownLatch::countDown() {
     }
 }
 
-int CountdownLatch::getCount() const {
+int CountDownLatch::getCount() const {
     MutexLockGuard lock(mutex_);
     return count_;
 }

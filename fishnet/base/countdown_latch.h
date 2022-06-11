@@ -4,9 +4,9 @@
 #include "fishnet/base/mutex.h"
 
 namespace fishnet {
-class CountdownLatch : noncopyable {
+class CountDownLatch : noncopyable {
 public:
-    explicit CountdownLatch(int count);
+    explicit CountDownLatch(int count);
 
     void wait();
 

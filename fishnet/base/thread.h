@@ -32,7 +32,7 @@ private:
     pid_t tid_;
     ThreadFunc func_;
     string name_;
-    CountdownLatch latch_;
+    CountDownLatch latch_;
 
     static AtomicInt32 numCreated_;
 };

@@ -24,22 +24,37 @@
 #include "fishnet/base/date.h"
 #include "fishnet/base/time_zone.h"
 #include "fishnet/base/logging.h"
+#include "fishnet/base/thread.h"
 
 using namespace std;
 using namespace fishnet;
 
+void func() {
+    LOG_TRACE << 12312 << " " << 56.695 << " " << true;
+}
+
 int main() {
-    // LogStream ls;
+    LogStream ls;
 
-    // LOG_TRACE << 12312 << " " << 56.695 << " " << true;
+    LOG_TRACE << 12312 << " " << 56.695 << " " << true;
 
-    // auto& buf = ls.buffer();
+    auto& buf = ls.buffer();
 
-    // LOG_DEBUG << buf.toString();
+    LOG_DEBUG << buf.toString();
 
-    // Date d(2022, 6, 10);
+    Date d(2022, 6, 10);
 
-    // LOG_INFO << d.julianDayNumber();
+    LOG_INFO << d.julianDayNumber();
+
+    Thread t(func, "func");
+
+    t.start();
+
+    t.join();
+
+    char* res = ::getenv("FISHNET_LOG_DEBUG");
+
+    printf("res: [%s]\n", res);
 
     return 0;
 }

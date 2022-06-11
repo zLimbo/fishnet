@@ -20,18 +20,20 @@ const char* strerror_tl(int savedErrno) {
 }
 
 Logger::LogLevel initLogLevel() {
-    if (::getenv("FISH_LOG_TRACE")) {
+    if (::getenv("FISHNET_LOG_TRACE")) {
         return Logger::LogLevel::TRACE;
-    } else if (::getenv("FISH_LOG_DEBUG")) {
+    } else if (::getenv("FISHNET_LOG_DEBUG")) {
         return Logger::LogLevel::DEBUG;
     } else {
         return Logger::LogLevel::INFO;
     }
 }
 
+Logger::LogLevel g_logLevel = initLogLevel();
+
 const char*
     LogLevelName[static_cast<size_t>(Logger::LogLevel::NUM_LOG_LEVELS)] = {
-        "TRACE ", "DEBUG ", "INFO ", "WARN ", "ERROR ", "FATAL "};
+        "TRACE ", "DEBUG ", "INFO  ", "WARN  ", "ERROR ", "FATAL "};
 
 class T {
 public:
