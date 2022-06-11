@@ -10,7 +10,9 @@ public:
         MCHECK(pthread_cond_init(&pcond_, NULL));
     }
 
-    ~Condition() { MCHECK(pthread_cond_destroy(&pcond_)); }
+    ~Condition() {
+        MCHECK(pthread_cond_destroy(&pcond_));
+    }
 
     void wait() {
         MutexLock::UnassignGuard ug(mutex_);
@@ -19,9 +21,13 @@ public:
 
     bool waitForSeconds(double seconds);
 
-    void notify() { MCHECK(pthread_cond_signal(&pcond_)); }
+    void notify() {
+        MCHECK(pthread_cond_signal(&pcond_));
+    }
 
-    void notifyAll() { MCHECK(pthread_cond_broadcast(&pcond_)); }
+    void notifyAll() {
+        MCHECK(pthread_cond_broadcast(&pcond_));
+    }
 
 private:
     MutexLock& mutex_;

@@ -11,9 +11,13 @@ public:
     TimeZone(int eastOfUtc, const char* tzname);
     TimeZone() = default;
 
-    bool valid() const { return static_cast<bool>(data_); }
+    bool valid() const {
+        return static_cast<bool>(data_);
+    }
 
-    operator bool() { return static_cast<bool>(data_); }
+    operator bool() {
+        return static_cast<bool>(data_);
+    }
 
     struct tm toLocalTime(time_t secondsSinceEpoch) const;
     time_t fromLocalTime(const struct tm&) const;

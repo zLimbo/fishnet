@@ -11,7 +11,9 @@
 namespace fishnet {
 using std::string;
 
-inline void memZero(void* p, size_t n) { memset(p, 0, n); }
+inline void memZero(void* p, size_t n) {
+    memset(p, 0, n);
+}
 
 // 作者：kenton\@google.com (Kenton Varda) 和其他
 // 包含库其余部分使用的基本类型和实用程序。使用implicit_cast 作为 static_cast 或

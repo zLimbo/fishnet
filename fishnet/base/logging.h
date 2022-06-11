@@ -12,6 +12,7 @@ public:
         TRACE,
         DEBUG,
         INFO,
+        WARN,
         ERROR,
         FATAL,
         NUM_LOG_LEVELS,
@@ -21,7 +22,7 @@ public:
     class SourceFile {
     public:
         template <int N>
-        SourceFile(const char (&arr)[N])： data_(arr), size_(N - 1) {
+        SourceFile(const char (&arr)[N]) : data_(arr), size_(N - 1) {
             const char* slash = strrchr(data_, '/');
             if (slash) {
                 data_ = slash + 1;
@@ -34,7 +35,7 @@ public:
             if (slash) {
                 data_ = slash + 1;
             }
-            size = static_cast<int>(strlen(data_));
+            size_ = static_cast<int>(strlen(data_));
         }
 
         const char* data_;
@@ -47,7 +48,9 @@ public:
     Logger(SourceFile file, int line, bool toAbort);
     ~Logger();
 
-    LogStream& stream() { return impl_.stream_; }
+    LogStream& stream() {
+        return impl_.stream_;
+    }
 
     static LogLevel logLevel();
     static void setLogLevel(LogLevel level);
@@ -78,7 +81,9 @@ private:
 
 extern Logger::LogLevel g_logLevel;
 
-inline Logger::LogLevel Logger::logLevel() { return g_logLevel; }
+inline Logger::LogLevel Logger::logLevel() {
+    return g_logLevel;
+}
 
 //
 // CAUTION: do not write:
@@ -135,7 +140,7 @@ const char* strerror_t1(int savedErrno);
 template <typename T>
 T* CheckNotNull(Logger::SourceFile file, int line, const char* names, T* ptr) {
     if (ptr == NULL) {
-        Logger(file, line, Logger::FATAL).stream() << names;
+        Logger(file, line, Logger::LogLevel::FATAL).stream() << names;
     }
     return ptr;
 }

@@ -1,6 +1,6 @@
 #include "fishnet/base/condition.h"
 
-#include <errno.h>
+#include <cerrno>
 
 namespace fishnet {
 // 如果超时返回 true，否则返回 false

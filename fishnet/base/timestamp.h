@@ -23,9 +23,13 @@ public:
     string toString() const;
     string toFormattedString(bool showMicroseconds = true) const;
 
-    bool valid() const { return microSecondsSinceEpoch_ > 0; }
+    bool valid() const {
+        return microSecondsSinceEpoch_ > 0;
+    }
 
-    int64_t microSecondsSinceEpoch() const { return microSecondsSinceEpoch_; }
+    int64_t microSecondsSinceEpoch() const {
+        return microSecondsSinceEpoch_;
+    }
 
     int64_t secondsSinceEpoch() const {
         return static_cast<time_t>(microSecondsSinceEpoch_ /
@@ -33,9 +37,13 @@ public:
     }
 
     static Timestamp now();
-    static Timestamp invalid() { return Timestamp(); }
+    static Timestamp invalid() {
+        return Timestamp();
+    }
 
-    static Timestamp fromUnixTime(time_t t) { return fromUnixTime(t, 0); }
+    static Timestamp fromUnixTime(time_t t) {
+        return fromUnixTime(t, 0);
+    }
 
     static Timestamp fromUnixTime(time_t t, int microseconds) {
         return Timestamp(static_cast<int64_t>(t) * KMicroSecondsPerSecond +

@@ -34,13 +34,23 @@ public:
 
     YearMonthDay yearMonthDay() const;
 
-    int year() const { return yearMonthDay().year; }
-    int month() const { return yearMonthDay().month; }
-    int day() const { return yearMonthDay().day; }
+    int year() const {
+        return yearMonthDay().year;
+    }
+    int month() const {
+        return yearMonthDay().month;
+    }
+    int day() const {
+        return yearMonthDay().day;
+    }
 
-    int weekDay() const { return (julianDayNumber_ + 1) % kDaysPerWeek; }
+    int weekDay() const {
+        return (julianDayNumber_ + 1) % kDaysPerWeek;
+    }
 
-    int julianDayNumber() const { return julianDayNumber_; }
+    int julianDayNumber() const {
+        return julianDayNumber_;
+    }
 
 private:
     int julianDayNumber_;

@@ -114,7 +114,9 @@ namespace fishnet {
 
 class CAPABILITY("mutex") MutexLock : noncopyable {
 public:
-    MutexLock() : holder_(0) { MCHECK(pthread_mutex_init(&mutex_, NULL)); }
+    MutexLock() : holder_(0) {
+        MCHECK(pthread_mutex_init(&mutex_, NULL));
+    }
 
     ~MutexLock() {
         assert(holder_ == 0);
@@ -141,7 +143,9 @@ public:
         MCHECK(pthread_mutex_unlock(&mutex_));
     }
 
-    pthread_mutex_t *getPthreadMutex() { return &mutex_; }
+    pthread_mutex_t *getPthreadMutex() {
+        return &mutex_;
+    }
 
 private:
     friend class Condition;
@@ -150,15 +154,21 @@ private:
         explicit UnassignGuard(MutexLock &owner) : owner_(owner) {
             owner_.unassignHolder();
         }
-        ~UnassignGuard() { owner_.assignHolder(); }
+        ~UnassignGuard() {
+            owner_.assignHolder();
+        }
 
     private:
         MutexLock &owner_;
     };
 
-    void unassignHolder() { holder_ = 0; }
+    void unassignHolder() {
+        holder_ = 0;
+    }
 
-    void assignHolder() { holder_ = current_thread::tid(); }
+    void assignHolder() {
+        holder_ = current_thread::tid();
+    }
 
     pthread_mutex_t mutex_;
     pid_t holder_;
@@ -176,7 +186,9 @@ public:
         mutex_.lock();
     }
 
-    ~MutexLockGuard() RELEASE() { mutex_.unlock(); }
+    ~MutexLockGuard() RELEASE() {
+        mutex_.unlock();
+    }
 
 private:
     MutexLock &mutex_;

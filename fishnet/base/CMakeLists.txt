@@ -4,6 +4,7 @@ set(base_SRCS
     current_thread.cc
     date.cc
     exception.cc
+    logging.cc
     log_stream.cc
     thread.cc
     timestamp.cc
