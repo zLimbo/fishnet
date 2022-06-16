@@ -1,10 +1,3 @@
-/*
- * @Date: 2022-06-08 02:05:03
- * @LastEditors: zLimbo z_limbo@foxmail.com
- * @LastEditTime: 2022-06-08 06:24:34
- * @FilePath: /fishnet/study/study.cpp
- */
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -25,6 +18,7 @@
 #include "fishnet/base/time_zone.h"
 #include "fishnet/base/logging.h"
 #include "fishnet/base/thread.h"
+#include "fishnet/base/process_info.h"
 
 using namespace std;
 using namespace fishnet;
@@ -55,6 +49,15 @@ int main() {
     char* res = ::getenv("FISHNET_LOG_DEBUG");
 
     printf("res: [%s]\n", res);
+
+    cout << process_info::procname() << "\n"
+         << process_info::exePath() << "\n"
+         << process_info::pageSize() << "\n"
+         << process_info::username() << "\n"
+         << process_info::hostname() << "\n"
+         << process_info::startTime().toFormattedString() << "\n"
+         << process_info::isDebugBuild() << "\n"
+         << process_info::procStatus() << endl;
 
     return 0;
 }

@@ -1,11 +1,15 @@
 set(base_SRCS
+    async_logging.cc
     condition.cc
     countdown_latch.cc
     current_thread.cc
     date.cc
     exception.cc
+    file_util.cc
+    log_file.cc
     logging.cc
     log_stream.cc
+    process_info.cc
     thread.cc
     timestamp.cc
     time_zone.cc
