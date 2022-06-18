@@ -11,6 +11,7 @@ set(base_SRCS
     log_stream.cc
     process_info.cc
     thread.cc
+    thread_pool.cc
     timestamp.cc
     time_zone.cc
 )

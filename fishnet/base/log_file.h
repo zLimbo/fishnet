@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "fishnet/base/mutex.h"
@@ -7,16 +8,16 @@
 
 namespace fishnet {
 
-namespace FileUtil {
+namespace file_util {
 
-class AppendFile;
+    class AppendFile;
 
 }
 
 class LogFile : noncopyable {
 public:
     LogFile(const string& basename, off_t rollSize, bool threadSafe = true,
-            int flushInterval = 3, int checkEveryN = 1024);
+        int flushInterval = 3, int checkEveryN = 1024);
 
     ~LogFile();
 
@@ -42,9 +43,9 @@ private:
     time_t startOfPeriod_;
     time_t lastRoll_;
     time_t lastFlush_;
-    std::unique_ptr<FileUtil::AppendFile> file_;
+    std::unique_ptr<file_util::AppendFile> file_;
 
     const static int kRollPerSeconds_ = 60 * 60 * 24;
 };
 
-}  // namespace fishnet
+} // namespace fishnet

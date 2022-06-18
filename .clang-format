@@ -1,0 +1,29 @@
+{ 
+    BasedOnStyle: Google,
+    AccessModifierOffset: -4,
+    IndentWidth: 4, 
+    TabWidth: 4,
+    ColumnLimit: 80,
+    # 允许排序#include
+    SortIncludes:	true,
+    # 对齐连续的尾随的注释
+    AlignTrailingComments: true,
+    # 允许短的块放在同一行
+    AllowShortBlocksOnASingleLine:	false,  
+    # 允许短的函数放在同一行: None, InlineOnly(定义在类中), Empty(空函数), Inline(定义在类中，空函数), All
+    AllowShortFunctionsOnASingleLine:	Empty,
+    # 允许短的if语句保持在同一行
+    AllowShortIfStatementsOnASingleLine:	false,
+    # 允许短的循环保持在同一行
+    AllowShortLoopsOnASingleLine:	false,
+    # 对齐连续的尾随的注释
+    AlignTrailingComments:	true,
+    # 自动检测函数的调用和定义是否被格式为每行一个参数(Experimental)
+    ExperimentalAutoDetectBinPacking:	false,
+    # 需要被解读为foreach循环而不是函数调用的宏
+    ForEachMacros:	[ foreach, Q_FOREACH, BOOST_FOREACH ],
+    # 描述具有特殊意义的注释的正则表达式，它不应该被分割为多行或以其它方式改变
+    CommentPragmas:	'^ IWYU pragma:',
+    # 构造函数的初始化列表要么都在同一行，要么都各自一行
+    ConstructorInitializerAllOnOneLineOrOnePerLine:	true,
+}    

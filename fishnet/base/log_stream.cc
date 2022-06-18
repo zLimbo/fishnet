@@ -24,63 +24,66 @@
 namespace fishnet {
 namespace detail {
 
-const char digits[] = "9876543210123456789";
-const char* zero = digits + 9;
-static_assert(sizeof(digits) == 20, "wrong number of digits");
+    const char digits[] = "9876543210123456789";
+    const char* zero = digits + 9;
+    static_assert(sizeof(digits) == 20, "wrong number of digits");
 
-const char digitsHex[] = "0123456789ABCDEF";
-static_assert(sizeof(digitsHex) == 17, "wrong number of digitsHex");
+    const char digitsHex[] = "0123456789ABCDEF";
+    static_assert(sizeof(digitsHex) == 17, "wrong number of digitsHex");
 
-// 高效整数转字符串，by Matthew Wilson
-template <typename T>
-size_t convert(char buf[], T value) {
-    T i = value;
-    char* p = buf;
+    // 高效整数转字符串，by Matthew Wilson
+    template <typename T>
+    size_t convert(char buf[], T value)
+    {
+        T i = value;
+        char* p = buf;
 
-    do {
-        int lsd = static_cast<int>(i % 10);
-        i /= 10;
-        *p++ = zero[lsd];
-    } while (i != 0);
+        do {
+            int lsd = static_cast<int>(i % 10);
+            i /= 10;
+            *p++ = zero[lsd];
+        } while (i != 0);
 
-    if (value < 0) {
-        *p++ = '-';
+        if (value < 0) {
+            *p++ = '-';
+        }
+        *p = '\0';
+        std::reverse(buf, p);
+        return p - buf;
     }
-    *p = '\0';
-    std::reverse(buf, p);
-    return p - buf;
-}
 
-size_t convertHex(char buf[], uintptr_t value) {
-    uintptr_t i = value;
-    char* p = buf;
+    size_t convertHex(char buf[], uintptr_t value)
+    {
+        uintptr_t i = value;
+        char* p = buf;
 
-    do {
-        int lsd = static_cast<int>(i % 16);
-        i /= 16;
-        *p++ = digitsHex[lsd];
-    } while (i != 0);
-    *p = '\0';
-    std::reverse(buf, p);
-    return p - buf;
-}
+        do {
+            int lsd = static_cast<int>(i % 16);
+            i /= 16;
+            *p++ = digitsHex[lsd];
+        } while (i != 0);
+        *p = '\0';
+        std::reverse(buf, p);
+        return p - buf;
+    }
 
-template class FixedBuffer<kSmallBuffer>;
-template class FixedBuffer<kLargerBuffer>;
+    template class FixedBuffer<kSmallBuffer>;
+    template class FixedBuffer<kLargerBuffer>;
 
-template <int SIZE>
-const char* FixedBuffer<SIZE>::debugString() {
-    *cur_ = '\0';
-    return data_;
-}
+    template <int SIZE>
+    const char* FixedBuffer<SIZE>::debugString()
+    {
+        *cur_ = '\0';
+        return data_;
+    }
 
-template <int SIZE>
-void FixedBuffer<SIZE>::cookieStart() {}
+    template <int SIZE>
+    void FixedBuffer<SIZE>::cookieStart() { }
 
-template <int SIZE>
-void FixedBuffer<SIZE>::cookieEnd() {}
+    template <int SIZE>
+    void FixedBuffer<SIZE>::cookieEnd() { }
 
-}  // namespace detail
+} // namespace detail
 
 /*
  Format a number with 5 characters, including SI units.
@@ -93,7 +96,8 @@ void FixedBuffer<SIZE>::cookieEnd() {}
  [1.00E, inf)
 */
 
-std::string formatSI(int64_t s) {
+std::string formatSI(int64_t s)
+{
     double n = static_cast<double>(s);
     char buf[64];
     if (s < 1000) {
@@ -141,7 +145,8 @@ std::string formatSI(int64_t s) {
  [ 100Ki, 1023Ki]
  [1.00Mi, 9.99Mi]
 */
-std::string formatIEC(int64_t s) {
+std::string formatIEC(int64_t s)
+{
     double n = static_cast<double>(s);
     char buf[64];
     const double Ki = 1024.0;
@@ -191,63 +196,73 @@ std::string formatIEC(int64_t s) {
     return buf;
 }
 
-void LogStream::staticCheck() {
+void LogStream::staticCheck()
+{
     static_assert(kMaxNumericSize - 10 > std::numeric_limits<double>::digits10,
-                  "kMaxNumericSize is large enough");
+        "kMaxNumericSize is large enough");
     static_assert(
         kMaxNumericSize - 10 > std::numeric_limits<long double>::digits10,
         "kMaxNumericSize is large enough");
     static_assert(kMaxNumericSize - 10 > std::numeric_limits<long>::digits10,
-                  "kMaxNumericSize is large enough");
+        "kMaxNumericSize is large enough");
     static_assert(
         kMaxNumericSize - 10 > std::numeric_limits<long long>::digits10,
         "kMaxNumericSize is large enough");
 }
 
 template <typename T>
-void LogStream::formatInteger(T v) {
+void LogStream::formatInteger(T v)
+{
     if (buffer_.avail() >= kMaxNumericSize) {
         size_t len = detail::convert(buffer_.current(), v);
         buffer_.add(len);
     }
 }
 
-LogStream& LogStream::operator<<(short v) {
+LogStream& LogStream::operator<<(short v)
+{
     *this << static_cast<int>(v);
     return *this;
 }
 
-LogStream& LogStream::operator<<(unsigned short v) {
+LogStream& LogStream::operator<<(unsigned short v)
+{
     *this << static_cast<unsigned int>(v);
     return *this;
 }
 
-LogStream& LogStream::operator<<(int v) {
+LogStream& LogStream::operator<<(int v)
+{
     formatInteger(v);
     return *this;
 }
 
-LogStream& LogStream::operator<<(unsigned int v) {
+LogStream& LogStream::operator<<(unsigned int v)
+{
     formatInteger(v);
     return *this;
 }
 
-LogStream& LogStream::operator<<(long v) {
+LogStream& LogStream::operator<<(long v)
+{
     formatInteger(v);
     return *this;
 }
 
-LogStream& LogStream::operator<<(long long v) {
+LogStream& LogStream::operator<<(long long v)
+{
     formatInteger(v);
     return *this;
 }
 
-LogStream& LogStream::operator<<(unsigned long long v) {
+LogStream& LogStream::operator<<(unsigned long long v)
+{
     formatInteger(v);
     return *this;
 }
 
-LogStream& LogStream::operator<<(const void* p) {
+LogStream& LogStream::operator<<(const void* p)
+{
     uintptr_t v = reinterpret_cast<uintptr_t>(p);
     if (buffer_.avail() >= kMaxNumericSize) {
         char* buf = buffer_.current();
@@ -259,7 +274,8 @@ LogStream& LogStream::operator<<(const void* p) {
     return *this;
 }
 
-LogStream& LogStream::operator<<(double v) {
+LogStream& LogStream::operator<<(double v)
+{
     if (buffer_.avail() >= kMaxNumericSize) {
         int len = snprintf(buffer_.current(), kMaxNumericSize, "%.12g", v);
         buffer_.add(len);
@@ -268,9 +284,10 @@ LogStream& LogStream::operator<<(double v) {
 }
 
 template <typename T>
-Fmt::Fmt(const char* fmt, T val) {
+Fmt::Fmt(const char* fmt, T val)
+{
     static_assert(std::is_arithmetic<T>::value == true,
-                  "Must be arithmetic type");
+        "Must be arithmetic type");
     length_ = snprintf(buf_, sizeof(buf_), fmt, val);
     assert(static_cast<size_t>(length_) < sizeof(buf_));
 }
@@ -288,4 +305,4 @@ template Fmt::Fmt(const char* fmt, unsigned long long);
 template Fmt::Fmt(const char* fmt, float);
 template Fmt::Fmt(const char* fmt, double);
 
-}  // namespace fishnet
+} // namespace fishnet
