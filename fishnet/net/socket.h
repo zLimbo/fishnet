@@ -44,6 +44,9 @@ public:
     /// Enable/disable SO_REUSEADDR
     void setReuseAddr(bool on);
 
+    /// Enable/disable SO_REUSEPORT
+    void setReusePort(bool on);
+
     /// Enable/disable SO_KEEPALIVE
     void setKeepAlive(bool on);
 

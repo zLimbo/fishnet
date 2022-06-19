@@ -7,6 +7,8 @@ endif()
 
 set(net_SRCS
     sockets_ops.cc
+    socket.cc
+    inet_address.cc
 )
 
 add_library(fishnet_net ${net_SRCS})
