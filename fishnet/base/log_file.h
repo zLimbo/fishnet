@@ -1,23 +1,23 @@
 
 #pragma once
 
+#include <memory>
+
 #include "fishnet/base/mutex.h"
 #include "fishnet/base/types.h"
-
-#include <memory>
 
 namespace fishnet {
 
 namespace file_util {
 
-    class AppendFile;
+class AppendFile;
 
 }
 
 class LogFile : noncopyable {
 public:
     LogFile(const string& basename, off_t rollSize, bool threadSafe = true,
-        int flushInterval = 3, int checkEveryN = 1024);
+            int flushInterval = 3, int checkEveryN = 1024);
 
     ~LogFile();
 
@@ -48,4 +48,4 @@ private:
     const static int kRollPerSeconds_ = 60 * 60 * 24;
 };
 
-} // namespace fishnet
+}  // namespace fishnet

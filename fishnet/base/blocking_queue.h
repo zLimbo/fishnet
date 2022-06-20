@@ -1,10 +1,10 @@
 #pragma once
 
+#include <cassert>
+#include <deque>
+
 #include "fishnet/base/condition.h"
 #include "fishnet/base/mutex.h"
-
-#include <deque>
-#include <cassert>
 
 namespace fishnet {
 

@@ -1,8 +1,9 @@
 #include "fishnet/base/async_logging.h"
-#include "fishnet/base/log_file.h"
-#include "fishnet/base/timestamp.h"
 
 #include <cstdio>
+
+#include "fishnet/base/log_file.h"
+#include "fishnet/base/timestamp.h"
 
 using namespace fishnet;
 

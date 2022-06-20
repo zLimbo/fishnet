@@ -1,5 +1,4 @@
 #include "fishnet/base/file_util.h"
-#include "fishnet/base/logging.h"
 
 #include <fcntl.h>
 #include <sys/stat.h>
@@ -8,6 +7,8 @@
 #include <cassert>
 #include <cerrno>
 #include <cstdio>
+
+#include "fishnet/base/logging.h"
 
 using namespace fishnet;
 

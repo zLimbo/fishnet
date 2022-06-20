@@ -1,9 +1,9 @@
 #pragma once
 
-#include "fishnet/base/string_piece.h"
-#include "fishnet/base/noncopyable.h"
-
 #include <zlib.h>
+
+#include "fishnet/base/noncopyable.h"
+#include "fishnet/base/string_piece.h"
 
 namespace fishnet {
 

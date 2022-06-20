@@ -1,7 +1,8 @@
 #pragma once
 
-#include "fishnet/base/mutex.h"
 #include <pthread.h>
+
+#include "fishnet/base/mutex.h"
 
 namespace fishnet {
 class Condition : noncopyable {

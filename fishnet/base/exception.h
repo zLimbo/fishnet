@@ -1,7 +1,8 @@
 #pragma once
 
-#include "fishnet/base/types.h"
 #include <exception>
+
+#include "fishnet/base/types.h"
 
 namespace fishnet {
 class Exception : public std::exception {

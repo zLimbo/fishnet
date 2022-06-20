@@ -34,7 +34,7 @@ public:
     const char* data() const {
         return ptr_;
     }
-    
+
     int size() const {
         return length_;
     }

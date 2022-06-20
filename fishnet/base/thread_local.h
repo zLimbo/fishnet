@@ -1,9 +1,9 @@
 #pragma once
 
+#include <pthread.h>
+
 #include "fishnet/base/mutex.h"
 #include "fishnet/base/noncopyable.h"
-
-#include <pthread.h>
 
 namespace fishnet {
 

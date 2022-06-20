@@ -1,4 +1,5 @@
 #include "fishnet/base/exception.h"
+
 #include "fishnet/base/current_thread.h"
 
 namespace fishnet {

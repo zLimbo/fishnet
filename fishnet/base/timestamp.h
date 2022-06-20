@@ -1,8 +1,9 @@
 #pragma once
 
+#include <boost/operators.hpp>
+
 #include "fishnet/base/copyable.h"
 #include "fishnet/base/types.h"
-#include <boost/operators.hpp>
 
 namespace fishnet {
 

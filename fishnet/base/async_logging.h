@@ -1,14 +1,14 @@
 #pragma once
 
+#include <atomic>
+#include <vector>
+
 #include "fishnet/base/blocking_queue.h"
 #include "fishnet/base/bounded_blocking_queue.h"
 #include "fishnet/base/countdown_latch.h"
+#include "fishnet/base/log_stream.h"
 #include "fishnet/base/mutex.h"
 #include "fishnet/base/thread.h"
-#include "fishnet/base/log_stream.h"
-
-#include <atomic>
-#include <vector>
 
 namespace fishnet {
 

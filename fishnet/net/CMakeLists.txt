@@ -6,9 +6,15 @@ if(NOT HAVE_ACCEPT4)
 endif() 
 
 set(net_SRCS
-    sockets_ops.cc
-    socket.cc
+    buffer.cc
+    channel.cc
+    event_loop.cc
     inet_address.cc
+    poller.cc
+    socket.cc
+    sockets_ops.cc
+    timer.cc
+    timer_queue.cc
 )
 
 add_library(fishnet_net ${net_SRCS})

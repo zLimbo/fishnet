@@ -1,11 +1,11 @@
 #pragma once
 
+#include <cassert>
+#include <cstring>
+
 #include "fishnet/base/noncopyable.h"
 #include "fishnet/base/string_piece.h"
 #include "fishnet/base/types.h"
-
-#include <cassert>
-#include <cstring>
 
 namespace fishnet {
 namespace detail {

@@ -1,10 +1,12 @@
 
 #pragma once
 
+#include <pthread.h>
+
+#include <cassert>
+
 #include "fishnet/base/current_thread.h"
 #include "fishnet/base/noncopyable.h"
-#include <cassert>
-#include <pthread.h>
 
 // Thread safety annotations {
 // https://clang.llvm.org/docs/ThreadSafetyAnalysis.html

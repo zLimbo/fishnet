@@ -1,10 +1,10 @@
 #pragma once
 
-#include "fishnet/base/noncopyable.h"
-
 #include <pthread.h>
 
 #include <cassert>
+
+#include "fishnet/base/noncopyable.h"
 
 namespace fishnet {
 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "fishnet/base/condition.h"
-#include "fishnet/base/mutex.h"
-
 #include <boost/circular_buffer.hpp>
 #include <cassert>
+
+#include "fishnet/base/condition.h"
+#include "fishnet/base/mutex.h"
 
 namespace fishnet {
 
@@ -67,7 +67,7 @@ public:
     }
 
 private:
-    MutexLock mutex_;
+    mutable MutexLock mutex_;
     Condition notEmpty_ GUARDED_BY(mutex_);
     Condition notFull_ GUARDED_BY(mutex_);
     boost::circular_buffer<T> queue_ GUARDED_BY(mutex_);

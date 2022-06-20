@@ -1,12 +1,12 @@
 #pragma once
 
+#include <deque>
+#include <vector>
+
 #include "fishnet/base/condition.h"
 #include "fishnet/base/mutex.h"
 #include "fishnet/base/thread.h"
 #include "fishnet/base/types.h"
-
-#include <deque>
-#include <vector>
 
 namespace fishnet {
 
@@ -17,7 +17,7 @@ public:
     explicit ThreadPool(const string& nameArg = string("ThreadPool"));
     ~ThreadPool();
 
-    //Must be called before start()
+    // Must be called before start()
     void setMaxQueueSize(int maxSize) {
         maxQueueSize_ = maxSize;
     }

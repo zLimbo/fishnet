@@ -1,12 +1,13 @@
 #pragma once
 
-#include "fishnet/base/atomic.h"
-#include "fishnet/base/countdown_latch.h"
-#include "fishnet/base/types.h"
+#include <pthread.h>
 
 #include <functional>
 #include <memory>
-#include <pthread.h>
+
+#include "fishnet/base/atomic.h"
+#include "fishnet/base/countdown_latch.h"
+#include "fishnet/base/types.h"
 
 namespace fishnet {
 class Thread : noncopyable {
@@ -22,7 +23,9 @@ public:
     // 返回 pthread_join()
     int join();
 
-    bool started() const { return started_; }
+    bool started() const {
+        return started_;
+    }
 
 private:
     void setDefaultName();

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "fishnet/base/noncopyable.h"
+#include <cstdint>
 
-#include <stdint.h>
+#include "fishnet/base/noncopyable.h"
 
 namespace fishnet {
 namespace detail {
