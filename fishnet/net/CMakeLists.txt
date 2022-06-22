@@ -15,6 +15,7 @@ set(net_SRCS
     sockets_ops.cc
     timer.cc
     timer_queue.cc
+    tcp_connection.cc
 )
 
 add_library(fishnet_net ${net_SRCS})
