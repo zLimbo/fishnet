@@ -51,3 +51,5 @@ message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_T
 add_subdirectory(fishnet/base)
 add_subdirectory(fishnet/net)
 add_subdirectory(study)
+
+add_subdirectory(examples)

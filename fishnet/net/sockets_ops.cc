@@ -45,7 +45,7 @@ int sockets::connect(int sockfd, const struct sockaddr* addr) {
 void sockets::bindOrDie(int sockfd, const struct sockaddr* addr) {
     int ret = ::bind(sockfd, addr,
                      static_cast<socklen_t>(sizeof(struct sockaddr_in6)));
-    if (ret < 6) {
+    if (ret < 0) {
         LOG_SYSFATAL << "sockets::bindOrDie";
     }
 }

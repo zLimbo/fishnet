@@ -1,9 +1,8 @@
 #include "fishnet/base/log_stream.h"
 
-#include <cstdint>
-
 #include <algorithm>
 #include <cassert>
+#include <cstdint>
 #include <cstdio>
 #include <cstring>
 #include <limits>
@@ -234,6 +233,11 @@ LogStream& LogStream::operator<<(unsigned int v) {
 }
 
 LogStream& LogStream::operator<<(long v) {
+    formatInteger(v);
+    return *this;
+}
+
+LogStream& LogStream::operator<<(unsigned long v) {
     formatInteger(v);
     return *this;
 }
