@@ -14,6 +14,20 @@
 using namespace fishnet;
 using namespace fishnet::net;
 
+// POLLIN           有数据可读。
+// POLLRDNORM       有普通数据可读。
+// POLLRDBAND       有优先数据可读。
+// POLLPRI          有紧迫数据可读。
+// POLLOUT          写数据不会导致阻塞。
+// POLLWRNORM       写普通数据不会导致阻塞。
+// POLLWRBAND       写优先数据不会导致阻塞。
+// POLLMSGSIGPOLL   消息可用。
+
+// 此外，revents域中还可能返回下列事件：
+// POLLER           指定的文件描述符发生错误。
+// POLLHUP          指定的文件描述符挂起事件。
+// POLLNVAL         指定的文件描述符非法。
+
 const int Channel::kNoneEvent = 0;
 const int Channel::kReadEvent = POLLIN | POLLPRI;
 const int Channel::kWriteEvent = POLLOUT;
