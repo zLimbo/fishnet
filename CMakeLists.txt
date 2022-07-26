@@ -39,6 +39,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
 endif()
 string(REPLACE ";" " " CMAKE_CXX_CFLAGS "${CXX_FLAGS}")
 
+
 set(CMAKE_CXX_FLAGS_DEBUG "-O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
@@ -50,6 +51,7 @@ message(STATUS "CXX_FLAGS = " ${CMAKE_CXX_FLAGS} " " ${CMAKE_CXX_FLAGS_${BUILD_T
 
 add_subdirectory(fishnet/base)
 add_subdirectory(fishnet/net)
+add_subdirectory(fishnet/utils)
 add_subdirectory(study)
 
 add_subdirectory(examples)

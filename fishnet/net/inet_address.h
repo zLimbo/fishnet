@@ -25,8 +25,7 @@ class InetAddress : public fishnet::copyable {
 public:
     /// Constructs an endpoint with given port number.
     /// Mostly used in TcpServer listening.
-    explicit InetAddress(uint16_t port = 0, bool loopbackOnly = false,
-                         bool ipv6 = false);
+    explicit InetAddress(uint16_t port = 0, bool loopback_only = false, bool ipv6 = false);
 
     /// Constructs an endpoint with given ip and port.
     /// @c ip should be "1.2.3.4"

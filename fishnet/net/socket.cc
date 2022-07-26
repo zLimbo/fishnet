@@ -34,15 +34,15 @@ bool Socket::getTcpInfoString(char* buf, int len) const {
                  "rto=%u ato=%u snd_mss=%u rcv_mss=%u "
                  "lost=%u retrans=%u rtt=%u rttvar=%u "
                  "sshthresh=%u cwnd=%u total_retrans=%u",
-                 tcpi.tcpi_retransmits,  // Number of unrecovered [RTO] timeouts
-                 tcpi.tcpi_rto,          // Retransmit timeout in usec
-                 tcpi.tcpi_ato,          // Predicted tick of soft clock in usec
-                 tcpi.tcpi_snd_mss,      // send max segment size
-                 tcpi.tcpi_rcv_mss,      // recv max segment size
-                 tcpi.tcpi_lost,         // Lost packets
-                 tcpi.tcpi_retrans,      // Retransmitted packets out
-                 tcpi.tcpi_rtt,          // Smoothed round trip time in usec
-                 tcpi.tcpi_rttvar,       // Medium deviation
+                 tcpi.tcpi_retransmits,     // Number of unrecovered [RTO] timeouts
+                 tcpi.tcpi_rto,             // Retransmit timeout in usec
+                 tcpi.tcpi_ato,             // Predicted tick of soft clock in usec
+                 tcpi.tcpi_snd_mss,         // send max segment size
+                 tcpi.tcpi_rcv_mss,         // recv max segment size
+                 tcpi.tcpi_lost,            // Lost packets
+                 tcpi.tcpi_retrans,         // Retransmitted packets out
+                 tcpi.tcpi_rtt,             // Smoothed round trip time in usec
+                 tcpi.tcpi_rttvar,          // Medium deviation
                  tcpi.tcpi_snd_ssthresh,    // send
                  tcpi.tcpi_snd_cwnd,        // congestion control window
                  tcpi.tcpi_total_retrans);  // Total retransmits for entire

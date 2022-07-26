@@ -9,13 +9,8 @@
 using namespace fishnet;
 using namespace fishnet::net;
 
-EventLoopThreadPool::EventLoopThreadPool(EventLoop* baseloop,
-                                         const string& nameArg)
-    : baseLoop_(baseloop),
-      name_(nameArg),
-      started_(false),
-      numThreads_(0),
-      next_(0) {}
+EventLoopThreadPool::EventLoopThreadPool(EventLoop* baseloop, const string& nameArg)
+    : baseLoop_(baseloop), name_(nameArg), started_(false), numThreads_(0), next_(0) {}
 
 EventLoopThreadPool::~EventLoopThreadPool() {
     // Don't delete loop, it's stack variable

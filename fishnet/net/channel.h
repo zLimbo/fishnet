@@ -25,12 +25,15 @@ public:
     void setReadCallback(ReadEventCallback cb) {
         readCallback_ = std::move(cb);
     }
+
     void setWriteCallback(EventCallback cb) {
         writeCallback_ = std::move(cb);
     }
+
     void setCloseCallback(EventCallback cb) {
         closeCallback_ = std::move(cb);
     }
+
     void setErrorCallback(EventCallback cb) {
         errorCallback_ = std::move(cb);
     }
@@ -47,8 +50,8 @@ public:
         return events_;
     }
 
-    void setRevents(int revt) {
-        revents_ = revt;
+    void setRevents(int revent) {
+        revents_ = revent;
     }
 
     bool isNoneEvent() const {
@@ -115,6 +118,7 @@ private:
     static string eventsToString(int fd, int ev);
 
     void update();
+
     void handleEventWithGuard(Timestamp receiveTime);
 
     static const int kNoneEvent;

@@ -25,8 +25,7 @@ inline T* get_pointer(const std::unique_ptr<T>& ptr) {
 }
 
 template <typename To, typename From>
-inline ::std::shared_ptr<To> down_pointer_cast(
-    const ::std::shared_ptr<From>& f) {
+inline ::std::shared_ptr<To> down_pointer_cast(const ::std::shared_ptr<From>& f) {
     if (false) {
         implicit_cast<From*, To*>(0);
     }
@@ -41,21 +40,19 @@ namespace net {
 
 class Buffer;
 class TcpConnection;
+
 using TcpConnectionPtr = std::shared_ptr<TcpConnection>;
 using TimerCallback = std::function<void()>;
 using ConnectionCallback = std::function<void(const TcpConnectionPtr&)>;
 using CloseCallback = std::function<void(const TcpConnectionPtr&)>;
 using WriteCompleteCallback = std::function<void(const TcpConnectionPtr&)>;
-using HighWaterMarkCallback =
-    std::function<void(const TcpConnectionPtr&, size_t)>;
+using HighWaterMarkCallback = std::function<void(const TcpConnectionPtr&, size_t)>;
 
 // the data has been read to (buf, len)
-using MessageCallback =
-    std::function<void(const TcpConnectionPtr&, Buffer*, Timestamp)>;
+using MessageCallback = std::function<void(const TcpConnectionPtr&, Buffer*, Timestamp)>;
 
 void defaultConnectionCallback(const TcpConnectionPtr& conn);
-void defaultMessageCallback(const TcpConnectionPtr& conn, Buffer* buffer,
-                            Timestamp receiveTime);
+void defaultMessageCallback(const TcpConnectionPtr& conn, Buffer* buffer, Timestamp receiveTime);
 
 }  // namespace net
 

@@ -3,7 +3,7 @@
     AccessModifierOffset: -4,
     IndentWidth: 4, 
     TabWidth: 4,
-    ColumnLimit: 80,
+    ColumnLimit: 100,
     # 允许排序#include
     SortIncludes:	true,
     # 对齐连续的尾随的注释

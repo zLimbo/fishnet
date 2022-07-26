@@ -71,6 +71,7 @@ void Channel::handleEvent(Timestamp receiveTime) {
     std::shared_ptr<void> guard;
     if (tied_) {
         guard = tie_.lock();
+        // 如果绑定，且资源在，则处理事件
         if (guard) {
             handleEventWithGuard(receiveTime);
         }

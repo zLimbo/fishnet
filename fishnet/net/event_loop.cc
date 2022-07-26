@@ -61,18 +61,20 @@ EventLoop::EventLoop()
       currentActiveChannel_(NULL) {
     LOG_DEBUG << "EventLoop created " << this << " in thread " << threadId_;
     if (t_loopInThisThread) {
-        LOG_FATAL << "Another EventLoop " << t_loopInThisThread
-                  << " exists in this thread " << threadId_;
+        LOG_FATAL << "Another EventLoop " << t_loopInThisThread << " exists in this thread "
+                  << threadId_;
     } else {
         t_loopInThisThread = this;
     }
+    //
     wakeupChannel_->setReadCallback(std::bind(&EventLoop::handleRead, this));
+    // 注册到loop.poller上
     wakeupChannel_->enableReading();
 }
 
 EventLoop::~EventLoop() {
-    LOG_DEBUG << "EventLoop " << this << " of thread " << threadId_
-              << " destructs in thread " << current_thread::tid();
+    LOG_DEBUG << "EventLoop " << this << " of thread " << threadId_ << " destructs in thread "
+              << current_thread::tid();
     wakeupChannel_->disableAll();
     wakeupChannel_->remove();
     ::close(wakeupFd_);
@@ -88,6 +90,7 @@ void EventLoop::loop() {
 
     while (!quit_) {
         activeChannels_.clear();
+        // 每10ms超时唤醒
         pollReturnTime_ = poller_->poll(kPollTimeMs, &activeChannels_);
         ++iteration_;
         if (Logger::LogLevel() <= Logger::LogLevel::TRACE) {
@@ -96,6 +99,7 @@ void EventLoop::loop() {
         eventHanding_ = true;
         for (Channel* channel : activeChannels_) {
             currentActiveChannel_ = channel;
+            // 处理事件
             currentActiveChannel_->handleEvent(pollReturnTime_);
         }
         currentActiveChannel_ = NULL;
@@ -167,8 +171,8 @@ void EventLoop::removeChannel(Channel* channel) {
     assertInLoopThread();
     if (eventHanding_) {
         assert(currentActiveChannel_ == channel ||
-               std::find(activeChannels_.begin(), activeChannels_.end(),
-                         channel) == activeChannels_.end());
+               std::find(activeChannels_.begin(), activeChannels_.end(), channel) ==
+                   activeChannels_.end());
     }
     poller_->removeChannel(channel);
 }
@@ -189,8 +193,7 @@ void EventLoop::wakeup() {
     uint64_t one = 1;
     ssize_t n = sockets::write(wakeupFd_, &one, sizeof(one));
     if (n != sizeof(one)) {
-        LOG_ERROR << "EventLoop::wakeup() writes " << n
-                  << " bytes instead of 8";
+        LOG_ERROR << "EventLoop::wakeup() writes " << n << " bytes instead of 8";
     }
 }
 
@@ -198,15 +201,14 @@ void EventLoop::handleRead() {
     uint64_t one = 1;
     ssize_t n = sockets::read(wakeupFd_, &one, sizeof(one));
     if (n != sizeof(one)) {
-        LOG_ERROR << "EventLoop::handleRead() reads " << n
-                  << " bytes instead of 8";
+        LOG_ERROR << "EventLoop::handleRead() reads " << n << " bytes instead of 8";
     }
 }
 
 void EventLoop::doPendingFunctors() {
     std::vector<Functor> functors;
     callingPendingFunctors_ = true;
-
+    // 节省锁的使用
     {
         MutexLockGuard lock(mutex_);
         functors.swap(pendingFunctors_);

@@ -22,6 +22,7 @@ public:
     using ChannelList = std::vector<Channel*>;
 
     Poller(EventLoop* loop);
+    
     virtual ~Poller();
 
     /// Polls the I/O events.
